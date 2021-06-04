@@ -1,26 +1,63 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
 
-function App() {
+import {
+  DefaultPalette,
+  IStackStyles,
+  IStackTokens,
+  Stack,
+} from "@fluentui/react";
+
+interface Props {}
+
+const stackStyles: IStackStyles = {
+  root: {
+    background: DefaultPalette.white,
+    borderRadius: 0,
+  },
+};
+
+const stackItemStyles: IStackStyles = {
+  root: {
+    display: "flex",
+    justifyContent: "center",
+    fontSize: 20,
+  },
+};
+
+const stackTokens: IStackTokens = {
+  childrenGap: 20,
+  padding: 20,
+};
+
+const App = (props: Props) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="slab"></div>
+      <Stack
+        horizontal
+        horizontalAlign="space-evenly"
+        styles={stackStyles}
+        tokens={stackTokens}
+      >
+        <Stack.Item styles={stackItemStyles} grow={0}>
+          <span>Item 1</span>
+        </Stack.Item>
+        <Stack.Item styles={stackItemStyles} grow={1}>
+          <span>Item 2</span>
+        </Stack.Item>
+        <Stack.Item styles={stackItemStyles} grow={2}>
+          <span>Item 3</span>
+        </Stack.Item>
+        <Stack.Item styles={stackItemStyles} grow={0}>
+          <span>Item 4</span>
+        </Stack.Item>
+        <Stack.Item styles={stackItemStyles} grow={2}>
+          <span>Item 5</span>
+        </Stack.Item>
+      </Stack>
+    </>
   );
-}
+};
 
 export default App;
