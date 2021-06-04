@@ -8,50 +8,50 @@ import {
   IStackTokens,
   PivotItem,
   Stack,
-  Text,
 } from "@fluentui/react";
 import TaskImage from "./TaskImage";
 import Title from "./Title";
 import Tabs from "./Tabs";
 import Profile from "./Profile";
 import Options from "./Options";
+import Boards from "./Boards";
+import Calendar from "./Calendar";
 
 interface Props {}
 
-const stackStyles: IStackStyles = {
-  root: {
-    background: DefaultPalette.white,
-    borderRadius: 0,
-  },
-};
-
-const stackItemStylesLeft: IStackStyles = {
-  root: {
-    display: "flex",
-    justifyContent: "flex-start",
-    fontSize: 20,
-    alignItems: "center",
-    marginLeft: 20,
-  },
-};
-
-const stackItemStylesRight: IStackStyles = {
-  root: {
-    display: "flex",
-    justifyContent: "flex-end",
-    fontSize: 20,
-    alignItems: "center",
-    marginRight: 20,
-  },
-};
-
-const stackTokens: IStackTokens = {
-  childrenGap: 20,
-  padding: 5,
-};
-
 const App = (props: Props) => {
   const [selectedKey, setSelectedKey] = useState("Boards");
+
+  const stackStyles: IStackStyles = {
+    root: {
+      background: DefaultPalette.white,
+    },
+  };
+
+  const stackItemStylesLeft: IStackStyles = {
+    root: {
+      display: "flex",
+      justifyContent: "flex-start",
+      fontSize: 20,
+      alignItems: "center",
+      marginLeft: 20,
+    },
+  };
+
+  const stackItemStylesRight: IStackStyles = {
+    root: {
+      display: "flex",
+      justifyContent: "flex-end",
+      fontSize: 20,
+      alignItems: "center",
+      marginRight: 20,
+    },
+  };
+
+  const stackTokens: IStackTokens = {
+    childrenGap: 20,
+    padding: 5,
+  };
 
   const handleLinkClick = (item?: PivotItem) => {
     if (item) {
@@ -63,7 +63,7 @@ const App = (props: Props) => {
     return (
       <>
         <Slab></Slab>
-        <Stack horizontal styles={stackStyles} tokens={stackTokens}>
+        <Stack horizontal wrap styles={stackStyles} tokens={stackTokens}>
           <Stack.Item styles={stackItemStylesLeft} grow={0}>
             <TaskImage></TaskImage>
           </Stack.Item>
@@ -83,20 +83,18 @@ const App = (props: Props) => {
           <Stack.Item styles={stackItemStylesRight} grow={0}>
             <Profile></Profile>
           </Stack.Item>
-          <Stack.Item styles={stackItemStylesRight} grow={1}>
+          <Stack.Item styles={stackItemStylesRight} grow={0}>
             <Options></Options>
           </Stack.Item>
         </Stack>
-        <div>
-          <Text variant="xLargePlus">Boards</Text>
-        </div>
+        <Boards></Boards>
       </>
     );
   } else {
     return (
       <>
         <Slab></Slab>
-        <Stack horizontal styles={stackStyles} tokens={stackTokens}>
+        <Stack horizontal wrap styles={stackStyles} tokens={stackTokens}>
           <Stack.Item styles={stackItemStylesLeft} grow={0}>
             <TaskImage></TaskImage>
           </Stack.Item>
@@ -116,13 +114,11 @@ const App = (props: Props) => {
           <Stack.Item styles={stackItemStylesRight} grow={0}>
             <Profile></Profile>
           </Stack.Item>
-          <Stack.Item styles={stackItemStylesRight} grow={1}>
+          <Stack.Item styles={stackItemStylesRight} grow={0}>
             <Options></Options>
           </Stack.Item>
         </Stack>
-        <div>
-          <Text variant="xLargePlus">Calendar</Text>
-        </div>
+        <Calendar></Calendar>
       </>
     );
   }

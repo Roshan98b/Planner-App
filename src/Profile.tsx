@@ -1,9 +1,15 @@
+import { IPersonaSharedProps, Persona, PersonaSize } from "@fluentui/react";
 import React from "react";
 
 interface Props {}
 
 const Profile = (props: Props) => {
-  return <div>Item 4</div>;
+  const person: IPersonaSharedProps = {
+    text: "Roshan Badrinath",
+    imageInitials: "RB",
+  };
+
+  return <Persona {...person} size={PersonaSize.size40}></Persona>;
 };
 
 export default Profile;
