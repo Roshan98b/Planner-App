@@ -59,69 +59,44 @@ const App = (props: Props) => {
     }
   };
 
-  if (selectedKey === "Boards") {
-    return (
-      <>
-        <Slab></Slab>
-        <Stack horizontal wrap styles={stackStyles} tokens={stackTokens}>
-          <Stack.Item styles={stackItemStylesLeft} grow={0}>
-            <TaskImage></TaskImage>
-          </Stack.Item>
-          <Stack.Item styles={stackItemStylesLeft} grow={1}>
-            <Title></Title>
-          </Stack.Item>
-          <Stack.Item styles={stackItemStylesLeft} grow={3}>
-            <selectorContext.Provider
-              value={{
-                selectedKey: selectedKey,
-                handleLinkClick: handleLinkClick,
-              }}
-            >
-              <Tabs></Tabs>
-            </selectorContext.Provider>
-          </Stack.Item>
-          <Stack.Item styles={stackItemStylesRight} grow={0}>
-            <Profile></Profile>
-          </Stack.Item>
-          <Stack.Item styles={stackItemStylesRight} grow={0}>
-            <Options></Options>
-          </Stack.Item>
-        </Stack>
-        <Boards></Boards>
-      </>
-    );
-  } else {
-    return (
-      <>
-        <Slab></Slab>
-        <Stack horizontal wrap styles={stackStyles} tokens={stackTokens}>
-          <Stack.Item styles={stackItemStylesLeft} grow={0}>
-            <TaskImage></TaskImage>
-          </Stack.Item>
-          <Stack.Item styles={stackItemStylesLeft} grow={1}>
-            <Title></Title>
-          </Stack.Item>
-          <Stack.Item styles={stackItemStylesLeft} grow={3}>
-            <selectorContext.Provider
-              value={{
-                selectedKey: selectedKey,
-                handleLinkClick: handleLinkClick,
-              }}
-            >
-              <Tabs></Tabs>
-            </selectorContext.Provider>
-          </Stack.Item>
-          <Stack.Item styles={stackItemStylesRight} grow={0}>
-            <Profile></Profile>
-          </Stack.Item>
-          <Stack.Item styles={stackItemStylesRight} grow={0}>
-            <Options></Options>
-          </Stack.Item>
-        </Stack>
-        <Calendar></Calendar>
-      </>
-    );
-  }
+  const renderBody = (selectedKey: string) => {
+    if (selectedKey === "Boards") {
+      return <Boards></Boards>;
+    } else {
+      return <Calendar></Calendar>;
+    }
+  };
+
+  return (
+    <>
+      <Slab></Slab>
+      <Stack horizontal wrap styles={stackStyles} tokens={stackTokens}>
+        <Stack.Item styles={stackItemStylesLeft} grow={0}>
+          <TaskImage></TaskImage>
+        </Stack.Item>
+        <Stack.Item styles={stackItemStylesLeft} grow={1}>
+          <Title></Title>
+        </Stack.Item>
+        <Stack.Item styles={stackItemStylesLeft} grow={3}>
+          <selectorContext.Provider
+            value={{
+              selectedKey: selectedKey,
+              handleLinkClick: handleLinkClick,
+            }}
+          >
+            <Tabs></Tabs>
+          </selectorContext.Provider>
+        </Stack.Item>
+        <Stack.Item styles={stackItemStylesRight} grow={0}>
+          <Profile></Profile>
+        </Stack.Item>
+        <Stack.Item styles={stackItemStylesRight} grow={0}>
+          <Options></Options>
+        </Stack.Item>
+      </Stack>
+      {renderBody(selectedKey)}
+    </>
+  );
 };
 
 export default App;
