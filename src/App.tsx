@@ -25,6 +25,9 @@ const App = (props: Props) => {
   const stackStyles: IStackStyles = {
     root: {
       background: DefaultPalette.white,
+      position: "sticky",
+      top: "50px",
+      padding: "1rem",
     },
   };
 
@@ -32,9 +35,7 @@ const App = (props: Props) => {
     root: {
       display: "flex",
       justifyContent: "flex-start",
-      fontSize: 20,
       alignItems: "center",
-      marginLeft: 20,
     },
   };
 
@@ -42,15 +43,12 @@ const App = (props: Props) => {
     root: {
       display: "flex",
       justifyContent: "flex-end",
-      fontSize: 20,
       alignItems: "center",
-      marginRight: 20,
     },
   };
 
   const stackTokens: IStackTokens = {
     childrenGap: 20,
-    padding: 5,
   };
 
   const handleLinkClick = (item?: PivotItem) => {

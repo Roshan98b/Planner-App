@@ -10,7 +10,6 @@ const TaskImage = (props: Props) => {
     fontSize: 40,
     backgroundColor: DefaultPalette.themeLighter,
     padding: "0.5rem",
-    borderRadius: 0,
   });
 
   return (
