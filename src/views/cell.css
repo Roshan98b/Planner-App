@@ -1,0 +1,9 @@
+.cell{
+    height: 12vh;
+    width: 12vw;
+    text-align: right;
+    border-style: solid;
+    margin: 1px 1px 1px 1px;
+    padding: 2px;
+    border-width: 0.2px;
+}

@@ -1,0 +1,28 @@
+.row {
+    display: flex;
+}
+
+.calendarView {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-top: 14vh;
+}
+
+.weekdays{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.weekday{
+    height: 12vh;
+    width: 12vw;
+    margin: 1px 1px 1px 1px;
+    padding: 2px;
+    text-align: right;
+    border-style: solid;
+    border-width: 0.2px;
+}
