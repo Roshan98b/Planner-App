@@ -1,7 +1,7 @@
 .slab {
-  position: static;
+  position: sticky;
   height: 50px;
   width: auto;
+  top: 0;
   background-color: rebeccapurple;
-  border-radius: 0;
 }
