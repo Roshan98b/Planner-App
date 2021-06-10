@@ -1,0 +1,38 @@
+.row {
+    display: flex;
+}
+
+.calendarView {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.monthControl{
+    height: wrap;
+    width: 100%;
+    margin: 1px 1px 1px 1px;
+    padding: 2px;
+    text-align: left;
+    font-weight: bolder;
+}
+
+.weekdays{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.childCalendar{
+    width: fit-content;
+}
+
+.weekday{
+    height: wrap;
+    width: 12vw;
+    margin: 1px 1px 1px 1px;
+    padding: 2px;
+    text-align: center;
+    font-weight: bolder;
+}
