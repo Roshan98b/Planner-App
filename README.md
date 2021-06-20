@@ -1,46 +1,103 @@
-# Getting Started with Create React App
+# Planner App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Run locally
 
-In the project directory, you can run:
+Installs all the dependencies.
 
-### `npm start`
+```shell
+npm install
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Runs the application locally.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```shell
+npm start
+```
 
-### `npm test`
+Build the application to `.\build` directory.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```shell
+npm run build
+```
 
-### `npm run build`
+## Run using Docker
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Build image from `Dockerfile` and apply appropriate version tag. The new image would get `latest` tag.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```shell
+docker build -t plannerapp:<version> -t plannerapp:latest .
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Create the container using latest image and map ports from `80` on container to `targetPort`.
 
-### `npm run eject`
+```shell
+docker run --name plannerapp -p <targetPort>:80 --rm plannerapp:latest
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Create a container and map shell to terminal.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```shell
+docker run --name plannerapp -p <targetPort>:80 --rm -it plannerapp:latest /bin/sh
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Map shell to terminal of a running container.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```shell
+docker exec -it plannerapp sh
+```
 
-## Learn More
+Clone the image with Docker Registry Name.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```shell
+docker tag plannerapp:latest <DockerRegistryName>/plannerapp:latest
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Push the image to Docker Registry
+
+```shell
+docker push <DockerRegistryName>/plannerapp:latest
+```
+
+Get the logs from the container. Argument `-f` is used to follow the logs and would reflect updates from the container.
+
+```shell
+docker container logs -f plannerapp
+```
+
+## Kubernetes deployment
+
+Create the Nginx Ingress Controller using Helm in a new namespace.
+
+```shell
+kubectl create namespace ingress-nginx
+
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+
+helm install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx --set controller.replicaCount=2
+```
+
+Deploy the application which creates a deployment and a service. Uses a new namespace `plannerapp` for the deployment.
+
+```shell
+kubectl apply -f .\manifests\plannerapp.yaml -n plannerapp
+```
+
+Deploy the ingress rules on the new namespace `plannerapp` which uses the Nginx Ingress Controller previously deployed.
+
+```shell
+kubectl apply -f .\manifests\ingress.yaml -n plannerapp
+```
+
+Map running pod shell to the terminal. Use `kubectl get pods` to get the pod name.
+
+```shell
+kubectl exec --stdin --tty <pod-name> -n plannerapp  -- sh
+```
+
+Get the logs of the ingress controller for debugging server failures.
+
+```shell
+kubectl logs -n ingress-nginx <ingress-controller-pod>
+```
