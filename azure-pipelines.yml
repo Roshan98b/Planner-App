@@ -43,4 +43,4 @@ stages:
                     action: "deploy"
                     kubernetesServiceConnection: $(kubernetesServiceConnection)
                     namespace: $(namespace)
-                    manifests: "$(System.ArtifactsDirectory)/manifests/plannerapp.yaml"
+                    manifests: "$(Agent.BuildDirectory)/manifests/plannerapp.yaml"
