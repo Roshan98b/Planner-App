@@ -45,4 +45,4 @@ stages:
                     namespace: $(namespace)
                     manifests: |
                       "$(Agent.BuildDirectory)/manifests/plannerapp.yaml"
-                      "$(Agent.BuildDirectory)/manifests/ingresss.yaml"
+                      "$(Agent.BuildDirectory)/manifests/ingress.yaml"
