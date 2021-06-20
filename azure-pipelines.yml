@@ -20,11 +20,10 @@ stages:
               tags: |
                 $(Build.BuildId)
                 latest
-          - task: PublishPipelineArtifact@1
+          - task: PublishBuildArtifacts@1
             inputs:
-              targetPath: "$(Build.SourcesDirectory)/manifests"
-              artifact: "manifests"
-              publishLocation: "pipeline"
+              PathtoPublish: '$(Build.SourcesDirectory)/manifests'
+              ArtifactName: 'manifests'
 
   - stage: Deploy
     displayName: Deploy stage
@@ -39,11 +38,6 @@ stages:
           runOnce:
             deploy:
               steps:
-                - task: DownloadPipelineArtifact@2
-                  inputs:
-                    buildType: "current"
-                    artifactName: "manifests"
-                    targetPath: "$(System.ArtifactsDirectory)/manifests"
                 - task: KubernetesManifest@0
                   inputs:
                     action: "deploy"
